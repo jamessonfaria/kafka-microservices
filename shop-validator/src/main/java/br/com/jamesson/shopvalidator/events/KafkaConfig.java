@@ -1,6 +1,6 @@
-package br.com.jamesson.shopapi.events;
+package br.com.jamesson.shopvalidator.events;
 
-import br.com.jamesson.shopapi.dto.ShopDTO;
+import br.com.jamesson.shopvalidator.dto.ShopDTO;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
