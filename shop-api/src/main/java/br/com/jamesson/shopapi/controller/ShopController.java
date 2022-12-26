@@ -1,6 +1,7 @@
 package br.com.jamesson.shopapi.controller;
 
 import br.com.jamesson.shopapi.dto.ShopDTO;
+import br.com.jamesson.shopapi.events.KafkaClient;
 import br.com.jamesson.shopapi.model.Shop;
 import br.com.jamesson.shopapi.repository.ShopRepository;
 import java.time.LocalDate;
@@ -21,6 +22,8 @@ public class ShopController {
 
   private final ShopRepository shopRepository;
 
+  private final KafkaClient kafkaClient;
+
   @GetMapping
   public ResponseEntity<List<ShopDTO>> getShop() {
     List<ShopDTO> listShop = shopRepository.findAll()
@@ -40,8 +43,10 @@ public class ShopController {
     Shop shop = Shop.convert(shopDTO);
     shop.getItems().forEach(i -> i.setShop(shop));
 
-    ShopDTO shopDtoReturn = ShopDTO.convert(shopRepository.save(shop));
-    return ResponseEntity.ok(shopDtoReturn);
+    shopDTO = ShopDTO.convert(shopRepository.save(shop));
+    kafkaClient.sendMessage(shopDTO);
+
+    return ResponseEntity.ok(shopDTO);
   }
 
 }
