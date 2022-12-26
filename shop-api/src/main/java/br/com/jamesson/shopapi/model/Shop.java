@@ -3,7 +3,6 @@ package br.com.jamesson.shopapi.model;
 import br.com.jamesson.shopapi.dto.ShopDTO;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -42,7 +41,7 @@ public class Shop {
     shop.setItems(shopDTO.getItems()
         .stream()
         .map(ShopItem::convert)
-        .collect(Collectors.toList())
+        .toList()
     );
 
     return shop;
