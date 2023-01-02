@@ -41,7 +41,8 @@ public class ShopController {
     shopDTO.setStatus("PENDING");
 
     Shop shop = Shop.convert(shopDTO);
-    shop.getItems().forEach(i -> i.setShop(shop));
+    if (shop.getItems() != null)
+      shop.getItems().forEach(i -> i.setShop(shop));
 
     shopDTO = ShopDTO.convert(shopRepository.save(shop));
     kafkaClient.sendMessage(shopDTO);

@@ -2,7 +2,10 @@ package br.com.jamesson.shopapi.model;
 
 import br.com.jamesson.shopapi.dto.ShopDTO;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Stream;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -42,10 +45,11 @@ public class Shop {
     shop.setStatus(shopDTO.getStatus());
     shop.setDateShop(shopDTO.getDateShop());
     shop.setBuyerIdentifier(shopDTO.getBuyerIdentifier());
-    shop.setItems(shopDTO.getItems()
+    shop.setItems(shopDTO.getItems() != null ?
+        shopDTO.getItems()
         .stream()
         .map(ShopItem::convert)
-        .toList()
+        .toList() : new ArrayList<>()
     );
 
     return shop;
