@@ -14,6 +14,7 @@ public class ShopDTO {
   private String identifier;
   private String status;
   private LocalDate dateShop;
+  private String buyerIdentifier;
   private List<ShopItemDTO> items = new ArrayList<>();
 
   public static ShopDTO convert(Shop shop) {
@@ -21,6 +22,7 @@ public class ShopDTO {
     shopDTO.setIdentifier(shop.getIdentifier());
     shopDTO.setStatus(shop.getStatus());
     shopDTO.setDateShop(shop.getDateShop());
+    shopDTO.setBuyerIdentifier(shop.getBuyerIdentifier());
     shopDTO.setItems(
         shop.getItems()
             .stream()

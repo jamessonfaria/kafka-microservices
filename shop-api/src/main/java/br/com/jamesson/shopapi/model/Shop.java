@@ -25,6 +25,9 @@ public class Shop {
   private String identifier;
   private String status;
 
+  @Column(name = "buyer_identifier")
+  private String buyerIdentifier;
+
   @Column(name = "date_shop")
   private LocalDate dateShop;
 
@@ -38,6 +41,7 @@ public class Shop {
     shop.setIdentifier(shopDTO.getIdentifier());
     shop.setStatus(shopDTO.getStatus());
     shop.setDateShop(shopDTO.getDateShop());
+    shop.setBuyerIdentifier(shopDTO.getBuyerIdentifier());
     shop.setItems(shopDTO.getItems()
         .stream()
         .map(ShopItem::convert)

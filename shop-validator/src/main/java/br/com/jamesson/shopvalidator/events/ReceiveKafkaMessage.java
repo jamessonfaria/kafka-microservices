@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.KafkaHeaders;
+import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -24,7 +26,10 @@ public class ReceiveKafkaMessage {
   private final ProductRepository productRepository;
 
   @KafkaListener(topics = SHOP_TOPIC_NAME, groupId = "group")
-  public void listenShopTopic(ShopDTO shopDTO) {
+  public void listenShopTopic(ShopDTO shopDTO,
+      @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) String key,
+      @Header(KafkaHeaders.RECEIVED_PARTITION_ID) String partitionId,
+      @Header(KafkaHeaders.RECEIVED_TIMESTAMP) String timestamp) {
 
     try {
       log.info("Compra recebida no tópico {}.", shopDTO.getIdentifier());
