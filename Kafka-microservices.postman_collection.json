@@ -1,0 +1,76 @@
+{
+	"info": {
+		"_postman_id": "13b80d87-4c34-4347-b112-f40c3b1e5052",
+		"name": "Kafka-microservices",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3793603"
+	},
+	"item": [
+		{
+			"name": "Post Shop",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"buyerIdentifier\": \"b-1\",\r\n    \"items\": [\r\n        {\r\n            \"productIdentifier\": \"123456789\",\r\n            \"amount\": \"1\",\r\n            \"price\": \"1000\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/shop",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"shop"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Shop",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/shop",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"shop"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Report Shop",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/shop_report",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"shop_report"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
