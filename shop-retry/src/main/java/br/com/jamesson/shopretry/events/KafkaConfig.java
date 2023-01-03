@@ -23,7 +23,7 @@ import org.springframework.kafka.support.serializer.JsonSerializer;
 @Configuration
 public class KafkaConfig {
 
-  @Value(value = "${kafka.bootstrapAddress:localhost:9092}")
+  @Value(value = "${spring.kafka.bootstrap-servers:localhost:9092}")
   private String bootstrapAddress;
 
   public ProducerFactory<String, ShopDTO> producerFactory() {

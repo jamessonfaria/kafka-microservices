@@ -1,0 +1,71 @@
+version: "3.6"
+services:
+  zookeeper:
+    image: 'bitnami/zookeeper:latest'
+    container_name: zookeeper
+    ports:
+      - '2181:2181'
+    networks:
+      - shop-net
+    environment:
+      ALLOW_ANONYMOUS_LOGIN: yes
+      ZOOKEEPER_CLIENT_PORT: 2181
+  kafka:
+    image: 'bitnami/kafka:latest'
+    container_name: kafka
+    ports:
+      - '9092:9092'
+    networks:
+      - shop-net
+    environment:
+      - KAFKA_BROKER_ID=1
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
+    depends_on:
+      - zookeeper
+      
+  shop-api:
+    image: shop-api
+    container_name: shop-api
+    ports:
+      - 8080:8080
+    depends_on:
+      - kafka
+    networks:
+      - shop-net
+
+  shop-validator:
+    image: shop-validator
+    container_name: shop-validator
+    ports:
+      - 8081:8081
+    networks:
+      - shop-net
+    depends_on:
+      - kafka
+
+  shop-report:
+    image: shop-report
+    container_name: shop-report
+    ports:
+      - 8082:8082
+    networks:
+      - shop-net
+    depends_on:
+      - kafka
+
+  shop-retry:
+    image: shop-retry
+    container_name: shop-retry
+    ports:
+      - 8083:8083
+    networks:
+      - shop-net
+    depends_on:
+      - kafka
+
+networks:
+  shop-net: 
+    external: true

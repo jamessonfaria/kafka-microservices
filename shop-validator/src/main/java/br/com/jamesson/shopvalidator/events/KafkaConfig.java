@@ -22,7 +22,7 @@ import org.springframework.kafka.support.serializer.JsonSerializer;
 @Configuration
 public class KafkaConfig {
 
-  @Value(value = "${kafka.bootstrapAddress:localhost:9092}")
+  @Value(value = "${spring.kafka.bootstrap-servers:localhost:9092}")
   private String bootstrapAddress;
 
   public ProducerFactory<String, ShopDTO> producerFactory() {
@@ -43,6 +43,9 @@ public class KafkaConfig {
 
     Map<String, Object> props = new HashMap<>();
     props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
+    props.put(ConsumerConfig.ALLOW_AUTO_CREATE_TOPICS_CONFIG, true);
+    props.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, 1000);
+    props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
     props.put(JsonDeserializer.TRUSTED_PACKAGES, "*");
 
     return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(), deserializer);

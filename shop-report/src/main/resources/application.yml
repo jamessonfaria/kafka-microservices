@@ -11,6 +11,8 @@ spring:
     console:
       enabled: true
       path: /h2-console
+  kafka:
+    bootstrap-servers: kafka:9092
 
 server:
-  port: 8083
+  port: 8082

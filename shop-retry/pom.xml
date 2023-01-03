@@ -10,7 +10,7 @@
 	</parent>
 
 	<groupId>br.com.jamesson</groupId>
-	<artifactId>shop-api</artifactId>
+	<artifactId>shop-retry</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>shop-retry</name>
 	<description>Shop Retry</description>
