@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class KafkaClient {
+public class SendKafkaMessage {
 
   private final KafkaTemplate<String, ShopDTO> kafkaTemplate;
 

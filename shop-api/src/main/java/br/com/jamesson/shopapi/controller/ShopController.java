@@ -1,7 +1,7 @@
 package br.com.jamesson.shopapi.controller;
 
 import br.com.jamesson.shopapi.dto.ShopDTO;
-import br.com.jamesson.shopapi.events.KafkaClient;
+import br.com.jamesson.shopapi.events.SendKafkaMessage;
 import br.com.jamesson.shopapi.model.Shop;
 import br.com.jamesson.shopapi.repository.ShopRepository;
 import java.time.LocalDate;
@@ -22,7 +22,7 @@ public class ShopController {
 
   private final ShopRepository shopRepository;
 
-  private final KafkaClient kafkaClient;
+  private final SendKafkaMessage kafkaClient;
 
   @GetMapping
   public ResponseEntity<List<ShopDTO>> getShop() {
